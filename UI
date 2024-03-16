@@ -1,0 +1,12 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+
+local Window = Library.CreateLib("xHelper", "RJTheme3")
+
+local Tab = Window:NewTab("Main")
+
+
+local Section = Tab:NewSection("Functions")
+
+Section:NewButton("InfJump", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/absolutelyxfunny/xHelper/main/InfiniteJump.lua"))()
+end)
