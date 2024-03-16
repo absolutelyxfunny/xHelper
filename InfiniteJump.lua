@@ -1,5 +1,5 @@
 --[[
-В© 2022 WeAreDevs | The WeAreDevs Infinite Jump script
+© 2022 WeAreDevs | The WeAreDevs Infinite Jump script
 Created and distributed by https://wearedevs.net/scripts
 March 9, 2022
 
