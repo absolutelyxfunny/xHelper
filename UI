@@ -3,10 +3,26 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Roboj
 local Window = Library.CreateLib("xHelper", "RJTheme3")
 
 local Tab = Window:NewTab("Main")
-
-
 local Section = Tab:NewSection("Functions")
 
 Section:NewButton("InfJump", "ButtonInfo", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/absolutelyxfunny/xHelper/main/InfiniteJump.lua"))()
+end)
+
+
+local Tab  = Window:NewTab("Teleports")
+local Section = Tab:NewSection("List")
+
+
+Section:NewButton("GreenBase", "ButtonInfo", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.62939453e-06, 139.399872, -131, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+end)
+Section:NewButton("RedBase", "ButtonInfo", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-131, 139.399872, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+Section:NewButton("YellowBase", "ButtonInfo", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(127.010338, 142.38205, 3.42107749, -0.990999281, 0.00059195701, -0.133865863, 0.000807403994, 0.99999845, -0.00155514397, 0.133864731, -0.00164923037, -0.990998268)
+end)
+Section:NewButton("BlueBase", "ButtonInfo", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.665102, 133.503357, 136.110703, 0.956589758, -0.290700406, 0.020718554, 0.000908748305, -0.0681152344, -0.997677028, 0.291436374, 0.954386473, -0.0648941621)
 end)
