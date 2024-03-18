@@ -14,6 +14,7 @@ local Tab  = Window:NewTab("Teleports")
 local Section = Tab:NewSection("List")
 
 
+
 Section:NewButton("GreenBase", "ButtonInfo", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.62939453e-06, 139.399872, -131, 0, 0, -1, 0, 1, 0, 1, 0, 0)
 end)
@@ -26,3 +27,11 @@ end)
 Section:NewButton("BlueBase", "ButtonInfo", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.665102, 133.503357, 136.110703, 0.956589758, -0.290700406, 0.020718554, 0.000908748305, -0.0681152344, -0.997677028, 0.291436374, 0.954386473, -0.0648941621)
 end)
+Section:NewButton("Lobby", "ButtonInfo", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(32, 400.5, -32, 0, 0, 1, -1, 0, 0, 0, -1, 0)
+end)
+
+
+
+local Tab  = Window:NewTab("Visuals")
+local Section = Tab:NewSection("VisualsList")
