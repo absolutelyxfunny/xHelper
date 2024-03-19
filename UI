@@ -35,3 +35,52 @@ end)
 
 local Tab  = Window:NewTab("Visuals")
 local Section = Tab:NewSection("VisualsList")
+
+
+
+--\Katana
+Section:NewButton("Katana", "ButtonInfo", function()
+local Tool = game:GetService("Lighting").Katana
+local Clone = Tool:Clone()
+Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+end)
+
+
+
+--\SpeedCoil
+Section:NewButton("SpeedCoil", "ButtonInfo", function()
+local Tool = game:GetService("Lighting").SpeedCoil
+local Clone = Tool:Clone()
+Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+end)
+
+
+--\GravityCoil
+Section:NewButton("GravityCoil", "ButtonInfo", function()
+local Tool = game:GetService("Lighting").GravityCoil
+local Clone = Tool:Clone()
+Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+end)
+
+
+--\Knive
+
+
+Section:NewButton("Knive", "ButtonInfo", function()
+local Tool = game:GetService("Lighting").Knive
+local Clone = Tool:Clone()
+Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+end)
+
+
+
+--\BoomBox
+
+
+Section:NewButton("BoomBox", "ButtonInfo", function()	
+_G.boomboxb = game:GetObjects('rbxassetid://740618400')[1]
+_G.boomboxb.Parent = game:GetService'Players'.LocalPlayer.Backpack
+loadstring(_G.boomboxb.Client.Source)() 
+loadstring(_G.boomboxb.Server.Source)()
+end)
+
