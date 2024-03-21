@@ -5,6 +5,20 @@ local Window = Library.CreateLib("xHelper", "RJTheme3")
 local Tab = Window:NewTab("Main")
 local Section = Tab:NewSection("Functions")
 
+
+
+
+--\RocketLauncherAim
+
+
+Section:NewTextBox("PlayerAim", "TextInfo", function(txt)
+   
+end)
+
+
+--\InfinityJump
+
+
 Section:NewButton("InfJump", "ButtonInfo", function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/absolutelyxfunny/xHelper/main/InfiniteJump.lua"))()
 end)
@@ -77,10 +91,9 @@ end)
 --\BoomBox
 
 
-Section:NewButton("BoomBox", "ButtonInfo", function()	
+Section:NewButton("BoomBox", "ButtonInfo", function() 
 _G.boomboxb = game:GetObjects('rbxassetid://740618400')[1]
 _G.boomboxb.Parent = game:GetService'Players'.LocalPlayer.Backpack
 loadstring(_G.boomboxb.Client.Source)() 
 loadstring(_G.boomboxb.Server.Source)()
 end)
-
