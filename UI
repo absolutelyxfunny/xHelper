@@ -1,128 +1,280 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+    local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local Window = Library.CreateLib("xHelper", "RJTheme3")
+    local Window = Rayfield:CreateWindow({
+        Name = "xHelper",
+        LoadingTitle = "xHelper",
+        LoadingSubtitle = "by xHelper",
+        ConfigurationSaving = {
+            Enabled = true,
+            FolderName = nil, 
+            FileName = "Big Hub"
+        },
+    })
 
-local Tab = Window:NewTab("Main")
-local Section = Tab:NewSection("Functions")
+    local Tab = Window:CreateTab("Main", nil)
+    local Button1 = Tab:CreateButton({
+        Name = "InfinityJump",
+        Callback = function()
+            _G.infinjump = not _G.infinjump
+
+            if _G.infinJumpStarted == nil then
+                -- Гарантирует, что это работает только один раз для сохранения ресурсов
+                _G.infinJumpStarted = true
+
+                -- Уведомление о готовности
+                game.StarterGui:SetCore("SendNotification", {Title="xHelper", Text="The xHelper Infinite Jump exploit is ready!", Duration=5})
+
+                -- Само бесконечное прыжок
+                local plr = game:GetService('Players').LocalPlayer
+                local m = plr:GetMouse()
+                m.KeyDown:connect(function(k)
+                    if _G.infinjump then
+                        if k:byte() == 32 then
+                            local humanoid = game:GetService('Players').LocalPlayer.Character:FindFirstChildOfClass('Humanoid')
+                            humanoid:ChangeState('Jumping')
+                            wait()
+                            humanoid:ChangeState('Seated')
+                        end
+                    end
+                end)
+            end
+        end
+    })
 
 
+    --\ChatSpammer
 
 
---\ChatSpam
-
-
-Section:NewButton("ChatSpam", "ButtonInfo", function()
-    local settings = {
-   AutoChat_Time = 1,
-   AutoChat_Delay = 1,
-   AutoChat = true,
-}
-
-local chatrem = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
-
-while task.wait(settings.AutoChat_Time) do
-    chatrem:FireServer('d s c. g g / xhelper - Join to best server', "All")
+    local Button1 = Tab:CreateButton({
+        Name = "СhatSpam",
+        Callback = function()
+            local settings = {
+                AutoChat_Time = 1,
+                AutoChat_Delay = 1,
+                AutoChat = true,
+    }
+    local chatrem = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest
+    while task.wait(settings.AutoChat_Time) do
+        chatrem:FireServer('d s c. g g / xhelper - JOIN TO BEST SERVER', "All")
+        chatrem:FireServer('d s c. g g / xhelper - BEST SCRIPTS EVER', "All")
+        end
     end
-end)
+    })
+
+
+    --\ServerHop
+
+local Button1 = Tab:CreateButton({
+    Name = "ServerHop",
+    Callback = function()
+        print(123)
+    end
+})
 
 
 
+-- AutoClick
+local isFunctionEnabled = false
+local playerHeadsThread = nil
+local autoClickThread = nil
+
+local function playerHeads()
+    local LP = game:GetService("Players").LocalPlayer
+    while isFunctionEnabled do
+        for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+            if v and v.Character and v ~= LP and v.Character:FindFirstChild("Head") then
+                local hrp = v.Character:FindFirstChild("Head")
+                hrp:BreakJoints()
+                hrp.Transparency = 0.8
+                hrp.BrickColor = v.TeamColor
+                hrp.Anchored = true
+                hrp.CanCollide = false
+                pcall(function()
+                    hrp.CFrame = LP.Character.HumanoidRootPart.CFrame * CFrame.new(1,0,-3.5)
+                end
+                )
+            end
+        end
+        wait(0.1)
+    end
+end
+
+local function equipSword()
+    local Players = game:GetService("Players")
+    local player = Players.LocalPlayer
+    if player then
+        local backpack = player:FindFirstChild("Backpack")
+        if backpack then
+            local sword = backpack:FindFirstChild("Sword")
+            if sword then
+                player.Character.Humanoid:EquipTool(sword)
+            end
+        end
+    end
+end
+
+local function performMouseClicks()
+    while isFunctionEnabled do
+        mouse1click()
+        wait()
+        mouse1release()
+        wait()
+    end
+end
+
+local function enableFunction()
+    if not isFunctionEnabled then
+        isFunctionEnabled = true
+        playerHeadsThread = coroutine.create(playerHeads)
+        autoClickThread = coroutine.create(performMouseClicks)
+        coroutine.resume(playerHeadsThread)
+        coroutine.resume(autoClickThread)
+        equipSword()  -- вызываем функцию equipSword
+    end
+end
+
+local function disableFunction()
+    if isFunctionEnabled then
+        isFunctionEnabled = false
+        if playerHeadsThread then
+            coroutine.yield(playerHeadsThread)
+            playerHeadsThread = nil
+        end
+        if autoClickThread then
+            coroutine.yield(autoClickThread)
+            autoClickThread = nil
+        end
+    end
+end
+
+local Keybind = Tab:CreateKeybind({
+   Name = "KillAll",
+   CurrentKeybind = "L",
+   HoldToInteract = false,
+   Flag = "Keybind1",
+   Callback = function()
+       if not isFunctionEnabled then
+           enableFunction()
+       else
+           disableFunction()
+       end
+   end,
+})
+--\Visuals
 
 
-
-
-
-
---\RocketLauncherAim
-
-
-Section:NewTextBox("PlayerAim", "TextInfo", function(txt)
-   local bebra = game:GetService("Workspace")[txt].HumanoidRootPart.Head.CFrame
-   local A_1 = Vector3.new(bebra)
-   print(bebra)
-
-   
-end)
-
-
---\InfinityJump
-
-
-Section:NewButton("InfJump", "ButtonInfo", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/absolutelyxfunny/xHelper/main/InfiniteJump.lua"))()
-end)
-
-
-local Tab  = Window:NewTab("Teleports")
-local Section = Tab:NewSection("List")
-
-
-
-Section:NewButton("GreenBase", "ButtonInfo", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.62939453e-06, 139.399872, -131, 0, 0, -1, 0, 1, 0, 1, 0, 0)
-end)
-Section:NewButton("RedBase", "ButtonInfo", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-131, 139.399872, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-end)
-Section:NewButton("YellowBase", "ButtonInfo", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(127.010338, 142.38205, 3.42107749, -0.990999281, 0.00059195701, -0.133865863, 0.000807403994, 0.99999845, -0.00155514397, 0.133864731, -0.00164923037, -0.990998268)
-end)
-Section:NewButton("BlueBase", "ButtonInfo", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.665102, 133.503357, 136.110703, 0.956589758, -0.290700406, 0.020718554, 0.000908748305, -0.0681152344, -0.997677028, 0.291436374, 0.954386473, -0.0648941621)
-end)
-Section:NewButton("Lobby", "ButtonInfo", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(32, 400.5, -32, 0, 0, 1, -1, 0, 0, 0, -1, 0)
-end)
-
-
-
-local Tab  = Window:NewTab("Visuals")
-local Section = Tab:NewSection("VisualsList")
-
-
-
---\Katana
-Section:NewButton("Katana", "ButtonInfo", function()
-local Tool = game:GetService("Lighting").Katana
-local Clone = Tool:Clone()
-Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
-end)
-
+    local Tab = Window:CreateTab("Visuals", nil)
+    local Button1 = Tab:CreateButton({
 
 
 --\SpeedCoil
-Section:NewButton("SpeedCoil", "ButtonInfo", function()
-local Tool = game:GetService("Lighting").SpeedCoil
-local Clone = Tool:Clone()
-Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
-end)
+
+
+        Name = "SpeedCoil",
+        Callback = function()
+            local Tool = game:GetService("Lighting").SpeedCoil
+            local Clone = Tool:Clone()
+            Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+        end,
+    })
 
 
 --\GravityCoil
-Section:NewButton("GravityCoil", "ButtonInfo", function()
-local Tool = game:GetService("Lighting").GravityCoil
-local Clone = Tool:Clone()
-Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
-end)
+
+
+    local Button1 = Tab:CreateButton({
+        Name = "GravityCoil",
+        Callback = function()
+            local Tool = game:GetService("Lighting").GravityCoil
+            local Clone = Tool:Clone()
+            Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+        end,
+    })
 
 
 --\Knive
 
-
-Section:NewButton("Knive", "ButtonInfo", function()
-local Tool = game:GetService("Lighting").Knive
-local Clone = Tool:Clone()
-Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
-end)
-
-
+    local Button1 = Tab:CreateButton({
+        Name = "Knive",
+        Callback = function()
+            local Tool = game:GetService("Lighting").Knive
+            local Clone = Tool:Clone()
+            Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+        end,
+    })
 
 --\BoomBox
 
+    local Button1 = Tab:CreateButton({
+        Name = "BoomBox",
+        Callback = function()
+            _G.boomboxb = game:GetObjects('rbxassetid://740618400')[1]
+            _G.boomboxb.Parent = game:GetService'Players'.LocalPlayer.Backpack
+            loadstring(_G.boomboxb.Client.Source)() 
+            loadstring(_G.boomboxb.Server.Source)()
+        end,
+    })
+--\Katana
+    local Button1 = Tab:CreateButton({
+        Name = "Katana",
+        Callback = function()
+            local Tool = game:GetService("Lighting").Katana
+            local Clone = Tool:Clone()
+            Clone.Parent = game:GetService("Players").LocalPlayer.Backpack
+        end,
+    })
 
-Section:NewButton("BoomBox", "ButtonInfo", function() 
-_G.boomboxb = game:GetObjects('rbxassetid://740618400')[1]
-_G.boomboxb.Parent = game:GetService'Players'.LocalPlayer.Backpack
-loadstring(_G.boomboxb.Client.Source)() 
-loadstring(_G.boomboxb.Server.Source)()
-end)
+--\Teleports
+
+    local Tab = Window:CreateTab("Teleports", nil)
+
+--\Lobby
+
+    local Button1 = Tab:CreateButton({
+        Name = "Lobby",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(32, 400.5, -32, 0, 0, 1, -1, 0, 0, 0, -1, 0)
+        end,
+    })
+
+
+--\RedBase
+
+    local Button1 = Tab:CreateButton({
+        Name = "RedBase",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-131, 139.399872, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end,
+    })
+
+
+--\BlueBase
+
+    local Button1 = Tab:CreateButton({
+        Name = "BlueBase",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.665102, 133.503357, 136.110703, 0.956589758, -0.290700406, 0.020718554, 0.000908748305, -0.0681152344, -0.997677028, 0.291436374, 0.954386473, -0.0648941621)
+        end,
+    })
+
+
+--\YellowBase
+
+
+    local Button1 = Tab:CreateButton({
+        Name = "YellowBase",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(127.010338, 142.38205, 3.42107749, -0.990999281, 0.00059195701, -0.133865863, 0.000807403994, 0.99999845, -0.00155514397, 0.133864731, -0.00164923037, -0.990998268)   
+        end,
+    })
+
+
+--\GreenBase
+    local Button1 = Tab:CreateButton({
+        Name = "GreenBase",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.62939453e-06, 139.399872, -131, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+        end,
+    })
+
+
