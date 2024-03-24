@@ -1,0 +1,62 @@
+local shouldRepeatPlayerHeads = true
+local shouldRepeatEquipSword = true
+local shouldRepeatMouseClicks = true
+
+local function playerHeads()
+    local LP = game:GetService("Players").LocalPlayer
+    while shouldRepeatPlayerHeads do
+        for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+            if v and v.Character and v ~= LP and v.Character:FindFirstChild("Head") then
+                local hrp = v.Character:FindFirstChild("Head")
+                hrp:BreakJoints()
+                hrp.Transparency = 0.8
+                hrp.BrickColor = v.TeamColor
+                hrp.Anchored = true
+                hrp.CanCollide = false
+                pcall(function()
+                    hrp.CFrame = LP.Character.HumanoidRootPart.CFrame * CFrame.new(1,0,-3.5)
+                end
+                )
+            end
+        end
+        wait(0.1)
+    end
+end
+
+local function equipSword()
+    local Players = game:GetService("Players")
+    local player = Players:FindFirstChildOfClass("Player")
+    if player and player.Character then
+        local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            local tool = game:GetService("Players").LocalPlayer.Backpack.Sword
+            if tool then
+                while shouldRepeatEquipSword do
+                    humanoid:EquipTool(tool)
+                    wait(0.1)
+                end
+            end
+        end
+    end
+end
+
+local function performMouseClicks()
+    while shouldRepeatMouseClicks do
+        mouse1click()
+        wait()
+        mouse1release()
+        wait()
+    end
+end
+
+spawn(playerHeads)
+spawn(equipSword)
+spawn(performMouseClicks)
+
+
+wait(3)
+
+-- Чтобы остановить циклы, установите соответствующие флаги в false
+shouldRepeatPlayerHeads = false
+shouldRepeatEquipSword = false
+shouldRepeatMouseClicks = false
