@@ -53,10 +53,3 @@ spawn(playerHeads)
 spawn(equipSword)
 spawn(performMouseClicks)
 
-
-wait(3)
-
--- Чтобы остановить циклы, установите соответствующие флаги в false
-shouldRepeatPlayerHeads = false
-shouldRepeatEquipSword = false
-shouldRepeatMouseClicks = false
