@@ -434,5 +434,5 @@ local Input = Tab:CreateInput({
 
 
 --\Credits
-    local Tab = Window:CreateTab("Credits", nil)
-    local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "Paragraph Example",SectionParent})
+    local Tab = Window:CreateTab("🧾Credits", nil)
+    local Paragraph = Tab:CreateParagraph({Title = "Discord", Content = "dsc.gg/xhelper",SectionParent})
