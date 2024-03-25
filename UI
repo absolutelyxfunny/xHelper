@@ -11,9 +11,31 @@
         },
     })
 
-    local Tab = Window:CreateTab("Main", nil)
+    local Tab = Window:CreateTab("🚩Main", nil)
+
+--\Fly
+
+
+
+
+--\WalkSpeed
+
+    local Slider = Tab:CreateSlider({
+        Name = "🌀WalkSpeed",
+        Range = {0, 200},
+        Increment = 1,
+        Suffix = "Speed",
+        CurrentValue = 16,
+        Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+   end,
+})
+
+
+
     local Button1 = Tab:CreateButton({
-        Name = "InfinityJump",
+        Name = "♾️InfiniteJump",
         Callback = function()
             _G.infinjump = not _G.infinjump
 
@@ -46,7 +68,7 @@
 
 
     local Button1 = Tab:CreateButton({
-        Name = "СhatSpam",
+        Name = "📄СhatSpam",
         Callback = function()
             local settings = {
                 AutoChat_Time = 1,
@@ -65,7 +87,7 @@
     --\ServerHop
 
 local Button1 = Tab:CreateButton({
-    Name = "ServerHop",
+    Name = "🔄ServerHop",
     Callback = function()
         local Player = game.Players.LocalPlayer    
         local Http = game:GetService("HttpService")
@@ -167,7 +189,7 @@ local function disableFunction()
 end
 
 local Keybind = Tab:CreateKeybind({
-   Name = "KillAll",
+   Name = "💀KillAll",
    CurrentKeybind = "L",
    HoldToInteract = false,
    Flag = "Keybind1",
@@ -179,17 +201,113 @@ local Keybind = Tab:CreateKeybind({
        end
    end,
 })
+
+
+--\Render
+
+
+
+
+local Tab = Window:CreateTab("🖼️Render", nil)
+
+
+ local function ApplyLowQualitySettings()
+    _G.Settings = {
+        Players = {
+            ["Ignore Me"] = true, -- Ignore your Character
+            ["Ignore Others"] = true -- Ignore other Characters
+        },
+        Meshes = {
+            Destroy = false, -- Destroy Meshes
+            LowDetail = true -- Low detail meshes (NOT SURE IT DOES ANYTHING)
+        },
+        Images = {
+            Invisible = true, -- Invisible Images
+            LowDetail = false, -- Low detail images (NOT SURE IT DOES ANYTHING)
+            Destroy = false, -- Destroy Images
+        },
+        ["No Particles"] = true, -- Disables all ParticleEmitter, Trail, Smoke, Fire and Sparkles
+        ["No Camera Effects"] = true, -- Disables all PostEffect's (Camera/Lighting Effects)
+        ["No Explosions"] = true, -- Makes Explosion's invisible
+        ["No Clothes"] = true, -- Removes Clothing from the game
+        ["Low Water Graphics"] = true, -- Removes Water Quality
+        ["No Shadows"] = true, -- Remove Shadows
+        ["Low Rendering"] = true, -- Lower Rendering
+        ["Low Quality Parts"] = true -- Lower quality parts
+    }
+end
+
+local function RevertLowQualitySettings()
+    _G.Settings = {
+        Players = {
+            ["Ignore Me"] = false,
+            ["Ignore Others"] = false
+        },
+        Meshes = {
+            Destroy = true,
+            LowDetail = false
+        },
+        Images = {
+            Invisible = false,
+            LowDetail = false,
+            Destroy = true
+        },
+        ["No Particles"] = false,
+        ["No Camera Effects"] = false,
+        ["No Explosions"] = false,
+        ["No Clothes"] = false,
+        ["Low Water Graphics"] = false,
+        ["No Shadows"] = false,
+        ["Low Rendering"] = false,
+        ["Low Quality Parts"] = false
+    }
+end
+local Toggle = Tab:CreateToggle({
+    Name = "📉Low quality",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        if Value == true then
+            ApplyLowQualitySettings()
+        else
+            RevertLowQualitySettings()
+        end
+    end,
+})
+
+
+
+
+
 --\Visuals
 
 
-    local Tab = Window:CreateTab("Visuals", nil)
+    local Tab = Window:CreateTab("🎨Visuals", nil)
+
+--\Headless
+
+
     local Button1 = Tab:CreateButton({
+        Name = "👤Headless",
+        Callback = function()
+            local Players = game:GetService("Players")
+            local player = Players.LocalPlayer
+
+            if player and player.Character and player.Character:FindFirstChild("Head") then
+                player.Character.Head.Size = Vector3.new(0.001, 0.001, 0.001)
+            end
+        end,
+    })
+
+
+
 
 
 --\SpeedCoil
 
 
-        Name = "SpeedCoil",
+    local Button1 = Tab:CreateButton({
+        Name = "🏃‍♂️SpeedCoil",
         Callback = function()
             local Tool = game:GetService("Lighting").SpeedCoil
             local Clone = Tool:Clone()
@@ -202,7 +320,7 @@ local Keybind = Tab:CreateKeybind({
 
 
     local Button1 = Tab:CreateButton({
-        Name = "GravityCoil",
+        Name = "⬆️GravityCoil",
         Callback = function()
             local Tool = game:GetService("Lighting").GravityCoil
             local Clone = Tool:Clone()
@@ -214,7 +332,7 @@ local Keybind = Tab:CreateKeybind({
 --\Knive
 
     local Button1 = Tab:CreateButton({
-        Name = "Knive",
+        Name = "⚔️Knive",
         Callback = function()
             local Tool = game:GetService("Lighting").Knive
             local Clone = Tool:Clone()
@@ -225,7 +343,7 @@ local Keybind = Tab:CreateKeybind({
 --\BoomBox
 
     local Button1 = Tab:CreateButton({
-        Name = "BoomBox",
+        Name = "📻BoomBox",
         Callback = function()
             _G.boomboxb = game:GetObjects('rbxassetid://740618400')[1]
             _G.boomboxb.Parent = game:GetService'Players'.LocalPlayer.Backpack
@@ -235,7 +353,7 @@ local Keybind = Tab:CreateKeybind({
     })
 --\Katana
     local Button1 = Tab:CreateButton({
-        Name = "Katana",
+        Name = "🗡️Katana",
         Callback = function()
             local Tool = game:GetService("Lighting").Katana
             local Clone = Tool:Clone()
@@ -245,12 +363,12 @@ local Keybind = Tab:CreateKeybind({
 
 --\Teleports
 
-    local Tab = Window:CreateTab("Teleports", nil)
+    local Tab = Window:CreateTab("⏩Teleports", nil)
 
 --\Lobby
 
     local Button1 = Tab:CreateButton({
-        Name = "Lobby",
+        Name = "🏛️Lobby",
         Callback = function()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(32, 400.5, -32, 0, 0, 1, -1, 0, 0, 0, -1, 0)
         end,
@@ -260,7 +378,7 @@ local Keybind = Tab:CreateKeybind({
 --\RedBase
 
     local Button1 = Tab:CreateButton({
-        Name = "RedBase",
+        Name = "🔴RedBase",
         Callback = function()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-131, 139.399872, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
         end,
@@ -270,7 +388,7 @@ local Keybind = Tab:CreateKeybind({
 --\BlueBase
 
     local Button1 = Tab:CreateButton({
-        Name = "BlueBase",
+        Name = "🔵BlueBase",
         Callback = function()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(22.665102, 133.503357, 136.110703, 0.956589758, -0.290700406, 0.020718554, 0.000908748305, -0.0681152344, -0.997677028, 0.291436374, 0.954386473, -0.0648941621)
         end,
@@ -281,7 +399,7 @@ local Keybind = Tab:CreateKeybind({
 
 
     local Button1 = Tab:CreateButton({
-        Name = "YellowBase",
+        Name = "🟡YellowBase",
         Callback = function()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(127.010338, 142.38205, 3.42107749, -0.990999281, 0.00059195701, -0.133865863, 0.000807403994, 0.99999845, -0.00155514397, 0.133864731, -0.00164923037, -0.990998268)   
         end,
@@ -290,8 +408,31 @@ local Keybind = Tab:CreateKeybind({
 
 --\GreenBase
     local Button1 = Tab:CreateButton({
-        Name = "GreenBase",
+        Name = "🟢GreenBase",
         Callback = function()
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.62939453e-06, 139.399872, -131, 0, 0, -1, 0, 1, 0, 1, 0, 0)
         end,
     })
+
+
+--\Teleport to
+
+local Input = Tab:CreateInput({
+    Name = "🔼Teleport to",
+    PlaceholderText = "Type username",
+    RemoveTextAfterFocusLost = true,
+    Callback = function(Text)
+        local targetUsername = Text
+        local players = game:GetService("Players")
+        local targetPlayer = players:FindFirstChild(targetUsername)
+        if targetPlayer then
+            game.Players.LocalPlayer.Character:MoveTo(targetPlayer.Character.HumanoidRootPart.Position) 
+        end
+    end
+})
+
+
+
+--\Credits
+    local Tab = Window:CreateTab("Credits", nil)
+    local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "Paragraph Example",SectionParent})
